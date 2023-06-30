@@ -1,23 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
 
+
+  
+  const [count, setCount] = useState(0);
+  const fn = () =>{
+    console.log("clicked");
+  }
+  const counter = () => {
+    var count = 0;
+    function increase() {
+      count++;
+      console.log(count);
+    }
+    return increase;
+  }
+  var counter1 = counter()
+  counter1()
+  counter1()
+  var counter2 = counter()
+  counter2()
+  counter2()
   return (
+    //fragment  jsx语法  tsx  
     <>
+      <p className="test" style={{ color: "red" }}>
+        Hello World
+      </p>
+      <div
+        style={{
+          width: "150px",
+          height: "150px",
+          borderRadius: "50%",
+          backgroundColor: "yellow",
+        }}
+        onClick={() => {
+          console.log("clicked");
+        }}
+      ></div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <label htmlFor="getName">name:</label>
+        <input type="text" id="getName" />
+        <button onClick={fn}>show</button>
       </div>
-      <h1>Vite + React</h1>
-      <p>Hello World</p>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -30,7 +57,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
