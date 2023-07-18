@@ -1,0 +1,76 @@
+.boxData {
+  width: 20vw;
+  height: 20vh;
+  border: #faa solid 1px;
+  margin: 0 auto;
+}
+
+.btn {
+  left: 42vw;
+  position: absolute;
+  font-size: 0.8rem;
+  top: 12vw;
+}
+
+.Title_a {
+  width: 300px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: aqua;
+}
+
+.shooping {
+  width: 300px;
+  height: 400px;
+}
+
+img {
+  width: 5vw;
+  height: 5vh;
+}
+
+
+
+.XXX::after {
+  height: 2vh;
+  content: "X";
+  background-color: #f00;
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
+.XXX::before {
+  width: 2.5vw;
+  content: "X";
+  background-color: #f00;
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
+.XXX {
+  height: 1vh;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.prprprprpr {
+  background-color: #FFCE46;
+  width: auto;
+  height: auto;
+
+}
+
+::-webkit-input-placeholder {
+  color: #FFCE46;
+}

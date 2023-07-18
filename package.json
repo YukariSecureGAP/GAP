@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "antd": "^5.7.0",
+    "craco-less": "^3.0.1"
+  }
+}
