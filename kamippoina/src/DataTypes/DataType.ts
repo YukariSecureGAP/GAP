@@ -31,4 +31,62 @@ export namespace AllTypes {
     content: string;
     okText?: string;
   }
+  export type DeskAreaList = {
+    deskAreaCaption: string;
+    deskAreaId: string;
+    sn: string;
+  };
+  export type Order = {
+    deskAreaCaption: string;
+    deskAreaId: string;
+    deskCaption: string;
+    totalAmount: string;
+    payTime: string;
+    deskId: string;
+    deskStatus: string;
+  };
+  export interface Menu {
+    menuClassId: number;
+    deskId: number;
+    pageIndex?: number;
+    pageSize?: number;
+  }
+  export type deskId = {
+    deskId: string | number;
+  };
+  export type deskAreaId = {
+    deskAreaId: number;
+  };
+  export interface FloorItem {
+    deskAreaCaption: string;
+    deskAreaId: string;
+    sn: string;
+  }
+  export interface DeskItem {
+    callingNumber: string;
+    createTime: string;
+    description: string;
+    deskAreaCaption: string;
+    deskAreaId: string;
+    deskCaption: string;
+    deskId: string;
+    deskStatus: string;
+    memberId: string;
+    memberName: string;
+    menuItemSpecialRequestDescription: string;
+    payTime: string;
+    peopleNumber: number;
+    prepaidPay: number;
+    seatNumber: number;
+    totalAmount: string;
+  }
+  export interface FoodType{
+    menuName: string;
+    menuClassCaption: string;
+    menuId: string;
+    menuPrice:number
+    menuClassId: string;
+    selected: boolean;
+    count: string;
+  }
 }

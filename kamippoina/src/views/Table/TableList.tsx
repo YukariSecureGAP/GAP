@@ -1,21 +1,34 @@
-import { useTable } from "./getTable";
-import { useEffect } from "react";
+// import { useTable } from "./getTable";
+import { useAuthContext } from "../../utils";
+import Style from "../../assets/Table/Table.module.less";
+import { TableHeader } from "./TableHeader";
+import { TitleBar } from "../../components";
 
-export const TableList: React.FC = () => {
-  const { onLoadTable, tableData, tableInfo } = useTable();
-  useEffect(() => {
-    console.log('works')
-    const fetchData = async () => {
-      if (!tableData || !tableInfo) {
-        await onLoadTable();
-      }
-    };
-    fetchData();
-  }, [onLoadTable, tableData, tableInfo]);
+interface IAuthFn {
+  auth: boolean;
+  logout: () => void;
+}
+
+const TableList: React.FC = () => {
+  const { logout } = useAuthContext() as IAuthFn;
 
   return (
-    <div>
-      <h1>TableList</h1>
-    </div>
+    <>
+      <div className={Style["root"]}>
+        <TitleBar titleText="餐台" />
+        <TableHeader />
+        <button
+          onClick={() => logout()}
+          style={{
+            position: "absolute",
+            bottom: "0",
+            right: "-1",
+          }}
+        >
+          Logout
+        </button>
+      </div>
+    </>
   );
 };
+export default TableList;

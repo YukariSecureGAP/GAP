@@ -1,0 +1,113 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const redis = require('redis');
+const fs = require('fs');
+const path = require('path');
+const app = express();
+const cors = require("cors")
+const bctypt = require("bcrypt");
+const REDIS_PORT = process.env.PORT || 6379;
+
+
+
+// 创建Redis客户端
+const client = redis.createClient();
+
+//check the connection
+client.on('connect', () => {
+    console.log('Redis client connected');
+});
+
+client.connect(6379,"127.0.0.1");
+
+client.on('error', (err) => {
+    console.error('Redis connection error:', err);
+});
+
+
+
+// 创建logs文件夹
+const logDir = path.join(__dirname, 'logs');
+if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir);
+}
+
+// 创建日志文件
+const logFile = path.join(logDir, 'app.log');
+
+app.use(bodyParser.json());
+
+// 日志中间件
+const logger = (req, res, next) => {
+    const log = `${new Date().toISOString()} - ${req.method} - ${req.url}\n`;
+
+    // 写入日志文件
+    fs.appendFile(logFile, log, (err) => {
+        if (err) {
+            console.error('Error writing log:', err);
+        }
+    });
+
+    next();
+};
+
+app.use(logger);
+
+// 注册接口
+app.post('/api/register', (req, res) => {
+    const { username, password } = req.body;
+
+    // 检查用户名是否已存在
+    client.hget('users', username, (err, reply) => {
+	    console.log("workds");
+        if (err) {
+            console.error('Error checking username:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (reply) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
+
+        // 保存用户信息到Redis
+        client.hset('users', username, password, (err) => {
+            if (err) {
+                console.error('Error saving user data:', err);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+
+            res.json({ message: 'Registration successful' });
+        });
+    });
+});
+
+// 登录接口
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // 获取用户密码
+    client.hget('users', username, (err, reply) => {
+        if (err) {
+            console.error('Error fetching user data:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        if (!reply) {
+            return res.status(401).json({ error: 'Username not found' });
+        }
+
+        if (reply !== password) {
+            return res.status(401).json({ error: 'Invalid password' });
+        }
+
+        res.json({ message: 'Login successful' });
+    });
+});
+
+app.use(cors());
+
+// 启动服务器
+const port = 5001;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});

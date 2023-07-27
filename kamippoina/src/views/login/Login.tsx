@@ -2,9 +2,10 @@ import Style from "../../assets/login/login.module.less";
 import { TitleBar } from "../../components";
 import { Form, Input, Switch, Button } from "antd";
 import { useLogin } from "./useLogin";
-export const Login = () => {
+
+const Login = () => {
   //调用useLogin
-  const { onFinish,initialValues,clickFnTest } = useLogin();
+  const { onFinish, initialValues } = useLogin();
   return (
     <>
       <div className={Style["root"]}>
@@ -12,7 +13,7 @@ export const Login = () => {
         <Form
           className={Style["form"]}
           name="basic"
-          onFinish={clickFnTest}
+          onFinish={onFinish}
           initialValues={initialValues}
           autoComplete="off"
         >
@@ -26,7 +27,7 @@ export const Login = () => {
             name="password"
             rules={[{ required: true, message: "请输入用户密码!" }]}
           >
-            <Input.Password prefix="密码" size="large" allowClear />
+              <Input.Password prefix="密码" size="large" allowClear />
           </Form.Item>
           <div className={Style["auto-login-box"]}>
             <span>自动登录</span>
@@ -45,3 +46,5 @@ export const Login = () => {
     </>
   );
 };
+
+export default Login;

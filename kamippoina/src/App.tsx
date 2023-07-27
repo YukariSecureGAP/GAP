@@ -1,12 +1,11 @@
-// import React from "react";
 import { ConfigProvider } from "antd";
-// import "./App.css";
 import Style from "./App.module.less";
-import { Login } from "./views/login";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { TableList } from "./views/Table";
-import { Hoc } from "./Lesson/secOrder";
+import { useRoutes } from "react-router-dom";
+import { Suspense } from "react";
+import { routes } from "./Router";
+import { AuthProvider } from "./utils";
 function App() {
+  const element = useRoutes(routes);
   return (
     <ConfigProvider
       theme={{
@@ -16,22 +15,11 @@ function App() {
       }}
     >
       <div className={Style.App}>
-       
-        <Router>
-          <Routes>
-            <Route path="/" element={<Hoc />} />
-            <Route path="/loggin" element={<Login />} />
-            <Route path="/table/:id" element={<TableList />} />
-            <Route
-              path="*"
-              element={
-                <div>
-                  <h1>404 ERROR</h1>
-                </div>
-              }
-            />
-          </Routes>
-        </Router>
+        <Suspense fallback={<div>loading...</div>}>
+          <AuthProvider>
+            <div>{element}</div>
+          </AuthProvider>
+        </Suspense>
       </div>
     </ConfigProvider>
   );

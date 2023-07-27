@@ -1,0 +1,30 @@
+.rollingBackground {
+  width: 100%;
+  height: 82vh;
+  position: relative;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.content {
+  width: 98vw;
+  height: 25vh;
+  margin: 0 auto;
+  text-align: justify;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+/* Media query for mobile devices with a screen width of 768px or less */
+@media only screen and (max-width: 768px) {
+  .rollingBackground {
+    height: 60vh; /* Adjust the height for mobile */
+  }
+
+  .content {
+    height: 20vh; /* Adjust the height for mobile */
+  }
+}
