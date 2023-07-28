@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { getAllImages } from "@/utils/http";
 import { Constants, API_BASE_URL } from "@/utils/constants";
 import "../assets/Style/Home/Img.less";
-import { Skeleton } from "antd";
+import { Skeleton,Button } from "antd";
 import ContactMe from "./ContactMe";
 import { TitleBar } from "./Title";
 import Navgation from "./Nav/Nav";
@@ -37,7 +37,6 @@ const Home = () => {
     setIsShow(false);
   };
 
-
   return (
     <>
       {
@@ -46,27 +45,39 @@ const Home = () => {
           <Skeleton active />
         ) : (
           <>
-            <div
-              className="content active"
-              style={{ height: "26vh" }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <TitleBar titleText="Yukari's GAP" />
-              <Navgation isShow={isShow} />
-            </div>
-            {images.map((image: Constants.ImageInfo) => (
-              <div key={image.imageName}>
-                <div
-                  className="rollingBackground"
-                  style={{
-                    backgroundImage: `url(${API_BASE_URL}${image.imagePath})`,
-                  }}
-                ></div>
-                <div className="content"></div>
+            <div className="root">
+              <div
+                className="content"
+                style={{ height: "17vh" }}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                <TitleBar titleText="Yukari's GAP" />
+                <Navgation isShow={isShow} />
+                <div className="login">
+                  <Button type="primary" href="/login" style={{
+                    marginRight: "10px"
+                  }}>
+                    登录
+                  </Button>
+                  <Button type="primary" href="/register">
+                    注册
+                  </Button>
+                </div>
               </div>
-            ))}
-            <ContactMe />
+              {images.map((image: Constants.ImageInfo) => (
+                <div key={image.imageName}>
+                  <div
+                    className="rollingBackground"
+                    style={{
+                      backgroundImage: `url(${API_BASE_URL}${image.imagePath})`,
+                    }}
+                  ></div>
+                  <div className="content"></div>
+                </div>
+              ))}
+              <ContactMe />
+            </div>
           </>
         )
       }

@@ -18,13 +18,24 @@
   justify-content: center;
   flex-direction: column;
 }
+.login{
+  position: absolute;
+  right: 1vw;
+  top: 0;
+}
 /* Media query for mobile devices with a screen width of 768px or less */
 @media only screen and (max-width: 768px) {
+  .root {
+    height: 100vh;
+    background-attachment: default;
+    
+  }
   .rollingBackground {
-    height: 60vh; /* Adjust the height for mobile */
+    height: 100vh; /* Adjust the height for mobile */
+    background-size: cover;
   }
 
   .content {
-    height: 20vh; /* Adjust the height for mobile */
   }
+
 }

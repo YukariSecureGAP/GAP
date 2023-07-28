@@ -1,6 +1,7 @@
 import type { MenuProps } from "antd";
 import { Button, Dropdown } from "antd";
 import "@/assets/Style/Nav/nav.less";
+
 const Navgation = ({ isShow }: { isShow: boolean }) => {
   // when mouse move to the top of the page, show the nav bar
   const items: MenuProps["items"] = [
@@ -82,14 +83,6 @@ const Navgation = ({ isShow }: { isShow: boolean }) => {
             <Button>关于</Button>
           </Dropdown>
           <br />
-          <div className="login">
-            <Button type="primary" href="/login">
-              登录
-            </Button>
-            <Button type="primary" href="/register">
-              注册
-            </Button>
-          </div>
         </div>
       ) : null}
     </>

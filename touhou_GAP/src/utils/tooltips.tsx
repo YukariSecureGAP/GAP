@@ -1,6 +1,5 @@
 import { Tag } from "antd";
 import { WechatFilled } from "@ant-design/icons";
-import { QRCode } from "antd";
 import WechatQrcode from "@/assets/Contact/weChat.jpg";
 import "@/assets/Style/tooltip.less"
 
@@ -15,7 +14,7 @@ const CustomTooltip = ({ content, children }:CustomTooltipProps) => (
       {children}
     </Tag>
     <span className="tooltiptext">
-      <QRCode value={content} size={200} />
+      <img src={content} style={{width:"200px",height:"200px"}} />
     </span>
   </span>
 );
